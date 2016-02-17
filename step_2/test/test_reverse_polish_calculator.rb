@@ -15,6 +15,6 @@ class TestReversePolishCalculator < Minitest::Test
   end
 
   def test_calculator_should_calculate_with_both_asterisk_and_plus_operator
-    assert_equal 36, @calculator.calc('4 2 7 + *')
+    assert_equal 36, @calculator.calc('2 7 + 4 *')
   end
 end
