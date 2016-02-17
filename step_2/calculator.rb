@@ -11,7 +11,7 @@ class Calculator
       case str
       when OPERAND_REGEXP
         @stack.push str.to_i
-      when OPERAND_REGEXP
+      when OPERATOR_REGEXP
         calculate! str.to_sym
       end
     end
