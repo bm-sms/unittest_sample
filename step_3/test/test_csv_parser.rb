@@ -6,7 +6,7 @@ class TestCSVParser < Minitest::Test
     @csv_parser = CSVParser.new
   end
 
-  def test_parse_csv_text_should_parse_correctly
+  def test_parse_csv_text_should_parse_comma_separated_text
     assert_equal [%w(apple orange melon)], @csv_parser.parse_csv_text('apple,orange,melon')
   end
 
