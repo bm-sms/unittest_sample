@@ -1,0 +1,62 @@
+require 'minitest/autorun'
+require_relative 'test_helper'
+require_relative '../lib/csv_parser'
+
+class TestCSVParser < Minitest::Test
+  FILE_NAME = 'example.csv'
+
+  def setup
+    @parser = CSVParser.new
+  end
+
+  def test_parse
+    assert_equal [['one', 'two'],
+                  ['three', 'four'],
+                  ['five,six,six1,six2', 'seven'],
+                  ['eight', 'nine"ten"'],
+                  ['aaa','bbb','ccc','ddd"eee','fff,ggg'],
+                  ["ou=Cosminexus,o=Hitachi"]],
+                  @parser.parse(FILE_NAME)
+  end
+
+  def test_parse_header
+    assert_equal [{one: 'three', two: 'four'},
+                  {one: 'five,six,six1,six2', two: 'seven'},
+                  {one: 'eight', two: 'nine"ten"'}],
+                  @parser.parse('example_header.csv', header: true)
+  end
+
+  def test_parse_raises
+    assert_raises(ArgumentError) {@parser.parse(FILE_NAME, header: true)}
+  end
+
+  def test_parse_csv_text_parse_line
+    assert_equal [["aaa","bbb","ccc"],["ddd","eee"]],
+                 @parser.parse_csv_text("aaa,bbb,ccc\nddd,eee")
+  end
+
+  def test_parse_csv_text_parse_enclosed_by_quotes
+    assert_equal [["aaa","bbb","ccc"]],
+                 @parser.parse_csv_text('"aaa","bbb","ccc"')
+  end
+
+  def test_parse_csv_text_parse_comma_in_word
+    assert_equal [["aaa,bbb","ccc"]],
+                 @parser.parse_csv_text('"aaa,bbb",ccc')
+  end
+
+  def test_parse_csv_text_parse_quotes_in_word
+    assert_equal [['aaa"bbb','ccc']],
+                 @parser.parse_csv_text('"aaa""bbb",ccc')
+  end
+
+  def test_parse_csv_text_unkind_words
+    assert_equal  [['ひとつめ', 'ふたつめ', 'みっ,つめ', 'よっ"つめ', 'いつつ"め', 'むっ"つめ', 'ななつめ"']],
+                 @parser.parse_csv_text(%Q|ひとつめ,ふたつめ,"みっ,つめ",よっ"つめ,いつつ"め,"むっ""つめ","ななつめ"""|)
+  end
+
+  def test_parse_line
+    assert_equal [%w( ひとつめ ふたつめ みっ,つめ よっ"つめ いつつ"め むっ"つめ ななつめ" )],
+                 @parser.parse_csv_text(%Q|ひとつめ,ふたつめ,"みっ,つめ",よっ"つめ,いつつ"め,"むっ""つめ","ななつめ"""|)
+  end
+end
