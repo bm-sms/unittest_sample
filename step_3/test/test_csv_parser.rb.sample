@@ -10,13 +10,7 @@ class TestCSVParser < Minitest::Test
   end
 
   def test_parse
-    assert_equal [['one', 'two'],
-                  ['three', 'four'],
-                  ['five,six,six1,six2', 'seven'],
-                  ['eight', 'nine"ten"'],
-                  ['aaa','bbb','ccc','ddd"eee','fff,ggg'],
-                  ["ou=Cosminexus,o=Hitachi"]],
-                  @parser.parse(FILE_NAME)
+    assert_equal [%w(one two),%w(three four), %w(five,six,six1,six2 seven)], @parser.parse(FILE_NAME)
   end
 
   def test_parse_csv_text_parse_line
