@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require_relative 'test_helper'
-require_relative '../lib/csv_parser'
+require_relative '../csv_parser'
 
 class TestCSVParser < Minitest::Test
   FILE_NAME = 'example.csv'
