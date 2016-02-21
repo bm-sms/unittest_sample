@@ -15,6 +15,6 @@ class TestReversePolishCalculator < Minitest::Test
   end
 
   def test_calculator_does_not_calculate_over_3_operators
-    assert_equal '式が不正です', @calculator.calc('10 20 30 +')
+    assert_equal 'Formula is invalid.', @calculator.calc('10 20 30 +')
   end
 end
