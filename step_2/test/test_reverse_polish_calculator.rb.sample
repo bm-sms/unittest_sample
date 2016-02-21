@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../calculator.rb'
+require_relative '../calculator'
 
 class TestReversePolishCalculator < Minitest::Test
   def setup
@@ -14,7 +14,7 @@ class TestReversePolishCalculator < Minitest::Test
     assert_equal 200, @calculator.calc('10 20 *')
   end
 
-  def test_calculator_should_calculate_with_both_asterisk_and_plus_operator
-    assert_equal 36, @calculator.calc('2 7 + 4 *')
+  def test_calculator_does_not_calculate_with_over_3_operators
+    assert_equal 'Formula is invalid.', @calculator.calc('10 20 30 +')
   end
 end

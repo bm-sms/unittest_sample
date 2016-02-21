@@ -1,30 +1,15 @@
 class Calculator
-  OPERAND_REGEXP  = /\d+/
-  OPERATOR_REGEXP = /\+|\*/
+  def calc(formula)
+    tokens = formula.split(' ')
+    return 'Formula is invalid.' if tokens.length != 3
+    operand_1, operand_2, operator = tokens
 
-  def initialize
-    @stack = []
-  end
-
-  def calc(expression)
-    expression.split(' ').each do |str|
-      case str
-      when OPERAND_REGEXP
-        @stack.push str.to_i
-      when OPERATOR_REGEXP
-        calculate! str.to_sym
-      end
+    if operator == '+'
+      operand_1.to_i + operand_2.to_i
+    elsif operator == '*'
+      operand_1.to_i * operand_2.to_i
     end
-
-    @stack.pop
-  end
-
-  private
-
-  def calculate!(operator)
-    register = @stack.pop
-    accumlator = register.send(operator, @stack.pop)
-
-    @stack.push accumlator
+  rescue => error
+    "Error raised: #{error}"
   end
 end
