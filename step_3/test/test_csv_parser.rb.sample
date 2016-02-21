@@ -19,17 +19,6 @@ class TestCSVParser < Minitest::Test
                   @parser.parse(FILE_NAME)
   end
 
-  def test_parse_header
-    assert_equal [{one: 'three', two: 'four'},
-                  {one: 'five,six,six1,six2', two: 'seven'},
-                  {one: 'eight', two: 'nine"ten"'}],
-                  @parser.parse('example_header.csv', header: true)
-  end
-
-  def test_parse_raises
-    assert_raises(ArgumentError) {@parser.parse(FILE_NAME, header: true)}
-  end
-
   def test_parse_csv_text_parse_line
     assert_equal [["aaa","bbb","ccc"],["ddd","eee"]],
                  @parser.parse_csv_text("aaa,bbb,ccc\nddd,eee")
