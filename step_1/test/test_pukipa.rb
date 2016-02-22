@@ -9,7 +9,7 @@ class TestPukipa < Minitest::Test
 
   def test_to_html_should_parse_list_element
     pu = Pukipa.new('-リスト表記')
-    str = "<ul>\n<li>リスト表記\n</li>\n</ul>"
+    str = "<ul><li>リスト表記</li></ul>"
     assert_equal str, pu.to_html
   end
 end
