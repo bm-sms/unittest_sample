@@ -1,12 +1,7 @@
 class CSVParser
   def parse(filename, header: false)
     text = File.open(filename, &:read)
-    parsed_text = parse_csv_text(text)
-    if header
-      to_header(parsed_text)
-    else
-      parsed_text
-    end
+    parse_csv_text(text)
   end
 
   def parse_csv_text(text)
@@ -39,14 +34,4 @@ class CSVParser
   def get_next_word
     @words.shift
   end
-
-  def to_header(arr)
-    key = arr.shift.map(&:to_sym)
-    begin
-      arr.map {|val| [key, val].transpose.to_h }
-    rescue IndexError
-      raise ArgumentError
-    end
-  end 
 end
-
