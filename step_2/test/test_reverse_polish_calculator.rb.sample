@@ -1,9 +1,9 @@
 require 'minitest/autorun'
-require_relative '../calculator'
+require_relative '../reverse_polish_calculator'
 
 class TestReversePolishCalculator < Minitest::Test
   def setup
-    @calculator = Calculator.new
+    @calculator = ReversePolishCalculator.new
   end
 
   def test_calculator_should_calculate_with_plus_operator

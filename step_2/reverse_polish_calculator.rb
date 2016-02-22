@@ -1,4 +1,4 @@
-class Calculator
+class ReversePolishCalculator
   def calc(formula)
     tokens = formula.split(' ')
     return 'Formula is invalid.' if tokens.length != 3
