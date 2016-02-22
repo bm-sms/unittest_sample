@@ -137,7 +137,7 @@ class Pukipa
       tmp.clear
     end
     result << "</#{list}>"
-    result.join "\n"
+    result.join
   end
 
   # dlのパーサ
