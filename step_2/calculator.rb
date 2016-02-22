@@ -9,7 +9,5 @@ class Calculator
     elsif operator == '*'
       operand_1.to_i * operand_2.to_i
     end
-  rescue => error
-    "Error raised: #{error}"
   end
 end
