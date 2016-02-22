@@ -37,9 +37,4 @@ class TestCSVParser < Minitest::Test
     assert_equal  [['ひとつめ', 'ふたつめ', 'みっ,つめ', 'よっ"つめ', 'いつつ"め', 'むっ"つめ', 'ななつめ"']],
                  @parser.parse_csv_text(%Q|ひとつめ,ふたつめ,"みっ,つめ",よっ"つめ,いつつ"め,"むっ""つめ","ななつめ"""|)
   end
-
-  def test_parse_line
-    assert_equal [%w( ひとつめ ふたつめ みっ,つめ よっ"つめ いつつ"め むっ"つめ ななつめ" )],
-                 @parser.parse_csv_text(%Q|ひとつめ,ふたつめ,"みっ,つめ",よっ"つめ,いつつ"め,"むっ""つめ","ななつめ"""|)
-  end
 end
