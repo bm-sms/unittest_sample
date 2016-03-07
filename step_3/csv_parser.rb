@@ -1,5 +1,5 @@
 class CSVParser
-  def parse(filename, header: false)
+  def parse(filename)
     text = File.open(filename, &:read)
     parse_csv_text(text)
   end
